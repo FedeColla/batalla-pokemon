@@ -1,19 +1,78 @@
-//LA SIGUIENTE PREENTRGA ABARCA: CICLOS-CONDICIONALES-FUNCIONES
+//LA SIGUIENTE PREENTRGA ABARCA: CICLOS-CONDICIONALES-FUNCIONES-ARRAYS-MÉTODOS DE ARRAY-OBJETOS
 
+
+let pokemones = [
+    {
+        nombre: "Charmander",
+        ataque: 116,
+    },
+    {
+        nombre: "Squirtle",
+        ataque: 94,
+    },
+    {
+        nombre: "Bulbasaur",
+        ataque: 118,
+    },
+    {
+        nombre: "Pikachu",
+        ataque: 112,
+    },
+    {
+        nombre: "Mewtwo",
+        ataque: 300,
+    },
+    {
+        nombre: "Latios",
+        ataque: 268,
+    },
+    {
+        nombre: "Mew",
+        ataque: 210,
+    },
+    {
+        nombre: "Snorlax",
+        ataque: 190,
+    },
+    {
+        nombre: "Cloyster",
+        ataque: 186,
+    },
+    {
+        nombre: "Magneton",
+        ataque: 223,
+    },
+    {
+        nombre: "Blastoise",
+        ataque: 171,
+    },
+    {
+        nombre: "Victreebel",
+        ataque: 207,
+    },
+    {
+        nombre: "Miltank",
+        ataque: 157,
+    },
+    {
+        nombre: "Mr. Mime",
+        ataque: 192,
+    },
+    {
+        nombre: "Electrode",
+        ataque: 173,
+    },
+    {
+        nombre: "Duskull",
+        ataque: 70,
+    }
+]
 
 function inicio () {
     
     let msjBienvenida = confirm(`
-    ⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿    Hola!
-    ⠀⠀⠀⠈⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠉⠁⠁   
-    ⣧⡀⠀⠀⠀⠀⠙⠿⠿⠿⠻⠿⠿⠟⠿⠛⠉⠀⠀⠀⠀⠀     
-    ⣿⣷⣄⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿    Estás a punto de iniciar 
-    ⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣴⣿⣿⣿⣿⡇   una batalla pokemon contra 
-    ⣿⣿⡟⠀⠀⢰⣹⡆⠀⠀⠀⠀⠀⠀⣭⣷⠀⠀⠀⠸⣿⣿⣿⣿    Charizard.
-    ⣿⣿⠃⠀⠀⠈⠉⠀⠀⠤⠄⠀⠀⠀⠉⠁⠀⠀⠀⠀⢿⣿⣿⡇    Para poder enfrentarlo 
-    ⣿⣿⢾⣿⣷⠀⠀⠀⠀⡠⠤⢄⠀⠀⠀⠠⣿⣿⣷⠀⢸⣿⣿     necesitás elegir un pokemón.
-    ⣿⣿⡀⠉⠀⠀⠀⠀⠀⢄⠀⢀⠀⠀⠀⠀⠉⠉⠁⠀⠀⣿⣿⡇
-    ⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿     ¿Comenzamos?`);
+Hola!
+Vamos a atrapar Pokemones para ver en tu pokedex qué tan poderosos son, y así calcular tu nivel de poder.`);
     
     return msjBienvenida;
 }
@@ -22,86 +81,59 @@ let inicioJuego = inicio();
 
 
 
-function elegirPokemon () {
-    let pokemon = prompt(
-        `¿Qué pokemon pensás necesitr para derrotar a Charizard?
-        Escribí el número para elegir:
-            
-        1. Charmander🔥    2. Squirtle💧    3. Bulbasure🌱    4. Pikachu⚡`
-    );
-    return pokemon;
-}
+function elegirPokemon() {
+    let pokemonesElegidos = [];
+    let cantidad = 5;
 
-
-function juego() {
-    if (inicioJuego === true) {
-        // Para obtener un número aleatorio que haga que el pokemón elegido luego tenga más o menos chances de ganar.
-        function ataque (a) {
-            let ataque = Math.floor(Math.random() * (50 + a + 1)) + a;
-            return ataque;
-        }
-
-        let resistencia = 250; //Esto es lo que aguanta Charizard inicialmente.
-
-        //Variables vcías que luego van a llenarse con datos.
-        let pokemonElegido;
-        let ataqueFinal;
+    while (pokemonesElegidos.length < cantidad) {
+        let indices = prompt(`Captura ${cantidad} Pokemones para incluir en tu Pokédex! Para eso tipea los números de índice separados por coma.
+${pokemones.map((pokemon, index) => `${index+1}: ${pokemon.nombre}`).join("\n")}`);
         
-        //Depende el pokemón elegido, se adquiere una confirmación para iniciar la batalla y un nivel de ataque (el cual no se le dice al usuario)
-        while (true) {
-            pokemonElegido = elegirPokemon();
-        
-            switch (pokemonElegido) {
-                case "1":
-                    alert("Elegiste a Charmander🔥, iniciá el torneo con un ataque! Tenés que vencer a charizard en un máximo de 5 intentos.");
-                    ataqueFinal= ataque(10);
-                    break
-                case "2":
-                    alert("Elegiste a Squirtle💧, iniciá el torneo con un ataque! Tenés que vencer a charizard en un máximo de 5 intentos.");
-                    ataqueFinal= ataque(50);
-                    break
-                case "3":
-                    alert("Elegiste a Bulbasure🌱, iniciá el torneo con un ataque! Tenés que vencer a charizard en un máximo de 5 intentos.");
-                    ataqueFinal= ataque(20);
-                    break
-                case "4":
-                    alert("Elegiste a Pikachu⚡, iniciá el torneo con un ataque! Tenés que vencer a charizard en un máximo de 5 intentos.");
-                    ataqueFinal= ataque(30);
-                    break
-                default:
-                    alert("⚠️ No elegiste ningún pokemon! Volvé a intentarlo.");
-                    continue;
-            }
+        if (indices === null) {
+            alert("La próxima vez será");
             break;
         }
 
-        function batalla(ataqueFinal, resistencia) {
-            let intentos = 5;
-            let puntos = resistencia;
+        let indicesArray = indices.split(',').map(index => parseInt(index.trim())); //convierte los números de string en numbers y elimina espacios vacíos.
+
+        // Verifica si todos los índices son válidos y únicos
+        let validaciones = indicesArray.every(index => !isNaN(index) && index >= 0 && index < pokemones.length+1); //.every sirve para asegurarme de que todos los métodos del array creado cumplan con las condiciones que detallo en esta línea de código. SI index es un número, si es mayor o igual a 0 y si es menor a la longitud del array "pokemones".
         
-            while (intentos > 0 && puntos > 0) {
-                puntos = puntos - ataqueFinal;
-                intentos--;
-        
-                if (puntos <= 0) {
-                    alert("✔️✔️✔️ Ganaste la batalla! Felicitaciones.✔️✔️✔️");
-                    break;
-                } else if (intentos <= 0) {
-                    alert("❌❌❌ Fuiste vencido. Suerte el próximo torneo! ❌❌❌");
-                    break;
-                } else {
-                    alert(`Charizard ahora tiene ${puntos} puntos de vida. Te quedan ${intentos} intentos.`);
-                }
+        if (validaciones) {
+            // Evita duplicados en la selección
+            pokemonesElegidos = [...new Set(indicesArray)].map(index => pokemones[index-1]); // En esta linea se vincula el número del índice elegido por el usuario (que es un string pero lo convierto a array) con el array de objetos de pokemones.
+            if (pokemonesElegidos.length === cantidad) {
+                break; //Si selecciona 5 pokemones, se corta el ciclo.
+            } else {
+                alert(`Seleccionaste ${pokemonesElegidos.length} Pokémon. Necesitás seleccionar exactamente ${cantidad}.`);
             }
+        } else {
+            alert("Algunos índices no son válidos. Intentá de nuevo.");
         }
-        batalla(ataqueFinal, resistencia);
     }
+    return pokemonesElegidos;
 }
 
+let seleccion = elegirPokemon();
 
-//Para que siempre se pueda elegir seguir jugando
+//Calcular promedio de ataque en el pokedex
 
-while (inicioJuego === true) { 
-    juego();
-    inicioJuego = inicio(); 
+function calcularAtaquePromedio(seleccion){
+    const suma = seleccion.reduce((acc, pokemon) => acc + pokemon.ataque, 0);
+    const promedio = suma / seleccion.length; //Pongo .length, peo también podría poner 5 (total a elegir).
+    return promedio;
 }
+
+let promedioAtaque = calcularAtaquePromedio(seleccion);
+console.log(`TU PROMEDIO DE ATAQUE ES ${promedioAtaque}`);
+
+function ordenarPorAtaque(seleccion) {
+    // Ordena el array de seleccion por ataque, de mayor a menor.
+    seleccion.sort((a, b) => b.ataque - a.ataque);
+    console.log("%c Nivel de ataque de tus Pokemones [DE MAYOR A MENOR]:","background-color:#a3ffa6;color:#035906;font-weight:600;padding: 5px 10px;");
+    return seleccion.forEach(element => {
+        console.table(element.nombre, element.ataque)
+    });
+}
+
+let pokemonesOrdenados = ordenarPorAtaque(seleccion);
